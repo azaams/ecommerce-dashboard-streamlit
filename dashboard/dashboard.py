@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 from babel.numbers import format_currency
+import os
 
 # Set global Seaborn theme
 sns.set_theme(style='dark')
@@ -122,7 +123,11 @@ def load_and_preprocess_data(file_path):
 
 def main():
     # Load main dataset
-    all_df = load_and_preprocess_data("main_data.csv")
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    file_path = os.path.join(current_dir, "main_data.csv")
+
+    all_df = load_and_preprocess_data(file_path)
     
     # Date filter boundaries
     min_date = all_df["order_purchase_timestamp"].min().date()
